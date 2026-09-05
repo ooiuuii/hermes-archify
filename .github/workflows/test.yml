@@ -1,0 +1,22 @@
+name: Verify extension
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Show runtime versions
+        run: |
+          python --version
+          node --version
+      - name: Install checksum-pinned engine
+        run: python setup_engine.py
+      - name: Unit and real-engine tests
+        run: python -m unittest discover -s tests -v

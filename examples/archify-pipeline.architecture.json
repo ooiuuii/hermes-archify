@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Archify: From Intent to Checked HTML",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "render-path",
+        "label": "Render and deliver",
+        "focus": ["user", "agent", "ir", "renderers", "template", "checker", "html"],
+        "note": "The agent authors the model; Archify renders it and checks the final artifact before delivery."
+      },
+      {
+        "id": "authoring-contract",
+        "label": "Authoring and validation",
+        "focus": ["skill", "agent", "ir", "schemas"],
+        "note": "Instructions guide authorship. Bundled schema validators check the authored JSON, not live infrastructure."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [40, 90],
+    "cols": 7,
+    "gapX": 36,
+    "gapY": 112,
+    "cellW": 144,
+    "cellH": 64
+  },
+  "components": [
+    {"id": "user", "type": "external", "label": "User", "sublabel": "question + source", "row": 1, "col": 0},
+    {"id": "agent", "type": "frontend", "label": "Agent Host", "sublabel": "understands the source", "row": 1, "col": 1},
+    {"id": "skill", "type": "frontend", "label": "SKILL.md", "sublabel": "authoring instructions", "row": 0, "col": 1},
+    {"id": "ir", "type": "messagebus", "label": "Typed JSON", "sublabel": "editable specification", "row": 1, "col": 2},
+    {"id": "schemas", "type": "security", "label": "Schema Checks", "sublabel": "bundled validators", "row": 0, "col": 2},
+    {"id": "renderers", "type": "backend", "label": "Renderers", "sublabel": "layout + inline SVG", "row": 1, "col": 3},
+    {"id": "template", "type": "frontend", "label": "HTML Viewer", "sublabel": "themes + exploration", "row": 1, "col": 4},
+    {"id": "checker", "type": "security", "label": "Artifact Checks", "sublabel": "final HTML / SVG", "row": 1, "col": 5},
+    {"id": "html", "type": "cloud", "label": "Checked HTML", "sublabel": "portable artifact", "row": 1, "col": 6}
+  ],
+  "boundaries": [
+    {"kind": "region", "label": "Archify rendering and validation package", "wraps": ["ir", "schemas", "renderers", "template", "checker"]}
+  ],
+  "connections": [
+    {"id": "user-to-agent", "from": "user", "to": "agent", "variant": "emphasis"},
+    {"id": "skill-to-agent", "from": "skill", "to": "agent", "fromSide": "bottom", "toSide": "top"},
+    {"id": "agent-to-ir", "from": "agent", "to": "ir", "variant": "emphasis"},
+    {"id": "ir-to-schemas", "from": "ir", "to": "schemas", "variant": "security", "fromSide": "top", "toSide": "bottom"},
+    {"id": "ir-to-renderers", "from": "ir", "to": "renderers", "variant": "emphasis"},
+    {"id": "renderers-to-template", "from": "renderers", "to": "template", "variant": "emphasis"},
+    {"id": "template-to-checker", "from": "template", "to": "checker", "variant": "emphasis"},
+    {"id": "checker-to-html", "from": "checker", "to": "html", "variant": "emphasis"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Authored model", "items": ["The agent selects facts and relationships.", "JSON remains available for precise revisions."]},
+    {"dot": "emerald", "title": "Checked delivery", "items": ["Schema, layout and final-artifact checks run.", "Delivery binds source and output bytes with hashes."]},
+    {"dot": "rose", "title": "Evidence boundary", "items": ["Checks do not discover runtime topology.", "Browser evidence and visual review are separate."]}
+  ]
+}

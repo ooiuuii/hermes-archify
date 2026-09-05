@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hermes × Archify — Recorded demo</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f2f3ed;--muted:#9caab9;--navy:#101923;--panel:#172430;--line:#30414f;--coral:#ff9a85;--mint:#b8dfca}
+    *{box-sizing:border-box}body{margin:0;background:#080e14;color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;display:grid;min-height:100vh;place-items:center}
+    button,a{-webkit-tap-highlight-color:transparent}button{font:inherit}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible{outline:3px solid var(--mint);outline-offset:5px}
+    .stage{width:min(100vw,177.7778vh);aspect-ratio:16/9;padding:3.2% 4%;background:radial-gradient(ellipse at 85% 5%,#20323b 0,transparent 48%),var(--navy);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:3%;overflow:hidden}
+    header,footer,.brand,.nav,.eyebrow,.proof-heading{display:flex;align-items:center}header,footer{justify-content:space-between;gap:20px}.brand{gap:16px;font-size:clamp(17px,1.55vw,30px);font-weight:650;letter-spacing:-.04em}
+    .mark{height:34px;width:34px;border:1px solid var(--coral);border-radius:10px;display:grid;place-items:center;color:var(--coral);font-weight:500}.cross{color:var(--coral)}.edition{font-size:clamp(10px,.75vw,15px);color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+    main{min-height:0}.slide{height:100%}.slide[hidden]{display:none}.intro,.outro{display:grid;grid-template-columns:1.12fr 1fr;align-items:center;gap:7%}.eyebrow{gap:10px;color:var(--mint);font-size:clamp(11px,.9vw,18px);letter-spacing:.15em;text-transform:uppercase;margin:0 0 24px}.eyebrow:before{content:"";width:24px;height:1px;background:currentColor}
+    h1,h2,p{margin:0}h1{font-size:clamp(34px,4.45vw,86px);line-height:1.06;letter-spacing:-.055em;font-weight:600}h1 span{color:var(--coral)}.lede{font-size:clamp(14px,1.28vw,25px);line-height:1.65;color:var(--muted);max-width:34em;margin-top:28px}
+    .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.tag{border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-size:clamp(10px,.8vw,16px);color:#c8d2dc}
+    .flow{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}.flow-row{display:grid;grid-template-columns:42px 1fr;gap:16px;padding:19px 0}.number{font-size:13px;color:var(--coral);padding-top:6px;letter-spacing:.12em}.flow h2{font-size:clamp(19px,1.65vw,32px);font-weight:500;letter-spacing:-.02em}.flow p{font-size:clamp(12px,.98vw,19px);color:var(--muted);line-height:1.6;margin-top:8px}.connector{height:26px;margin-left:20px;border-left:1px solid var(--line)}
+    .boundary{font-size:clamp(11px,.87vw,17px);line-height:1.65;color:var(--muted);margin-top:24px}.boundary strong{font-weight:500;color:var(--mint)}
+    .proof{display:grid;grid-template-rows:auto minmax(0,1fr);gap:18px}.proof-heading{justify-content:space-between;gap:20px}.proof-heading h1{font-size:clamp(24px,2.25vw,44px);letter-spacing:-.04em}.record-label{font-size:clamp(10px,.85vw,17px);color:var(--mint);white-space:nowrap}
+    .proof-grid{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:20px;min-height:0}.viewer{min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.viewer iframe{width:100%;height:100%;border:0;background:#fff}.viewer-footer{padding:10px 16px;background:#1c2935;color:var(--muted);display:flex;justify-content:space-between;font-size:12px}.viewer-footer a{color:var(--mint)}
+    .receipt{padding:22px 20px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:auto}.receipt h2{font-size:17px;font-weight:500}.receipt-state{font-size:13px;line-height:1.5;color:var(--muted);margin:10px 0 20px}.receipt-state[data-kind=good]{color:var(--mint)}.receipt-state[data-kind=bad]{color:var(--coral)}
+    dl{margin:0}dt{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin:18px 0 7px}dd{margin:0;font-size:14px;line-height:1.5;overflow-wrap:anywhere}.hash{font:11px/1.7 Consolas,"Courier New",monospace;letter-spacing:.02em}.checks{padding:0;margin:18px 0;list-style:none}.checks li{font-size:12px;line-height:1.6;padding:7px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.checks span{color:var(--mint);flex-shrink:0}.receipt .boundary{font-size:12px;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
+    .install{padding:34px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.install h2{font-size:clamp(20px,1.8vw,35px);line-height:1.25;font-weight:500;letter-spacing:-.03em}.repo-link{display:block;font-size:clamp(16px,1.38vw,27px);color:var(--mint);margin:24px 0;overflow-wrap:anywhere}.install-path{border-top:1px solid var(--line);padding-top:20px;font-size:clamp(12px,.98vw,19px);line-height:1.8;color:var(--muted)}.install-path b{color:var(--ink);font-weight:500}.install .boundary{font-size:clamp(11px,.82vw,16px)}
+    footer{border-top:1px solid var(--line);padding-top:18px}.page-label{font-size:12px;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}.nav{gap:7px}.nav button{background:transparent;border:1px solid transparent;color:var(--muted);border-radius:999px;padding:9px 17px;font-size:13px;cursor:pointer}.nav button:hover{color:var(--ink);border-color:var(--line)}.nav button[aria-current=step]{color:var(--navy);background:var(--mint)}.key-hint{font-size:11px;color:var(--muted)}
+    @media(max-width:1100px){.stage{padding:3%;gap:2%}.proof-grid{grid-template-columns:minmax(0,1fr) 220px;gap:12px}.receipt{padding:13px}.eyebrow{margin-bottom:16px}.lede{margin-top:18px}.tags{margin-top:18px}.flow{padding:10px 0}.flow-row{padding:10px 0}.connector{height:12px}.boundary{margin-top:15px}.install{padding:24px}.key-hint{display:none}}
+    @media(max-width:700px){body{display:block}.stage{width:100%;aspect-ratio:auto;min-height:100vh;padding:24px;gap:30px}.edition{display:none}.intro,.outro{grid-template-columns:1fr;gap:30px}.proof-grid{grid-template-columns:1fr}.viewer{height:60vh}.proof-heading{align-items:flex-start;flex-direction:column}.nav button{padding:8px 11px}footer{gap:12px}.page-label{font-size:10px}.slide{height:auto}.proof{min-height:75vh}}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <header><a class="brand" href="#intro" aria-label="Hermes and Archify introduction"><span class="mark" aria-hidden="true">H</span>Hermes <span class="cross">×</span> Archify</a><span class="edition">Independent extension · Recorded demo</span></header>
+    <main>
+      <section class="slide intro" id="intro" aria-labelledby="intro-title">
+        <div><p class="eyebrow">Source-grounded architecture</p><h1 id="intro-title">From source.<br>To a diagram<br><span>you can inspect.</span></h1><p class="lede">Hermes understands the repository.<br>Archify checks and renders the authored model.</p><div class="tags"><span class="tag">No Hermes core patch</span><span class="tag">Pinned local engine</span><span class="tag">Interactive HTML</span></div></div>
+        <div><div class="flow"><div class="flow-row"><span class="number">01</span><div><h2>Read &amp; author</h2><p>Repository evidence becomes an explicit architecture model.</p></div></div><div class="connector"></div><div class="flow-row"><span class="number">02</span><div><h2>Check &amp; render</h2><p>The extension invokes a separately installed, pinned Archify engine.</p></div></div><div class="connector"></div><div class="flow-row"><span class="number">03</span><div><h2>Inspect &amp; share</h2><p>Open the interactive HTML. Keep the execution receipt beside it.</p></div></div></div><p class="boundary"><strong>A clear boundary.</strong> Source grounding is authored evidence, not proof of runtime topology.</p></div>
+      </section>
+      <section class="slide proof" id="proof" aria-labelledby="proof-title" hidden>
+        <div class="proof-heading"><h1 id="proof-title">The artifact. The evidence.</h1><span class="record-label">Recorded execution · saved receipt</span></div>
+        <div class="proof-grid">
+          <div class="viewer"><iframe src="../artifacts/demo/architecture.html" title="Actual Archify interactive architecture viewer"></iframe><div class="viewer-footer"><span>Actual generated HTML · Interactive viewer</span><a href="../artifacts/demo/architecture.html" target="_blank" rel="noopener">Open artifact ↗</a></div></div>
+          <aside class="receipt" aria-label="Saved execution receipt"><h2>Execution receipt</h2><p id="receipt-state" class="receipt-state" role="status">Loading the saved receipt…</p><dl><dt>Result</dt><dd id="result">Not available</dd><dt>Engine</dt><dd id="engine">Not available</dd><dt>Artifact</dt><dd id="artifact">Not available</dd><dt>Artifact SHA-256</dt><dd id="digest" class="hash">Not available</dd><dt>Composition</dt><dd id="composition">Not available</dd></dl><ul id="checks" class="checks" aria-label="Recorded checks"></ul><p class="boundary"><strong>Evidence boundary</strong><br>Recorded checks and artifact identity.<br><br>Source grounding is authored, not runtime topology proof. Visual quality is a separate judgment.</p></aside>
+        </div>
+      </section>
+      <section class="slide outro" id="outro" aria-labelledby="outro-title" hidden>
+        <div><p class="eyebrow">Small bridge. Clear boundaries.</p><h1 id="outro-title">Understand.<br>Render.<br><span>Inspect.</span></h1><p class="lede">A local architecture workflow for Hermes.<br>A diagram you can open. Evidence you can keep.</p></div>
+        <div class="install"><h2>Try Hermes Archify</h2><a class="repo-link" href="https://github.com/ooiuuii/hermes-archify" target="_blank" rel="noopener">github.com/ooiuuii/<br>hermes-archify ↗</a><p class="install-path"><b>Installation path</b><br>Repository README → Installation<br>Install the extension → Set up the pinned engine</p><p class="boundary">Follow the repository instructions for the current supported setup. Engine installation is explicit, never triggered by a model tool call.</p><p class="boundary">Community project. Not an official Nous Research or Archify product.</p></div>
+      </section>
+    </main>
+    <footer><span class="page-label" id="page-label">01 / 03 · Introduction</span><nav class="nav" aria-label="Demo sections"><button type="button" data-slide="intro" aria-current="step">01 Intro</button><button type="button" data-slide="proof">02 Evidence</button><button type="button" data-slide="outro">03 Get started</button></nav><span class="key-hint">← → to navigate</span></footer>
+  </div>
+  <script>
+    const names = ["intro", "proof", "outro"], labels = ["Introduction", "Evidence", "Get started"];
+    const buttons = [...document.querySelectorAll("[data-slide]")];
+    let current = 0;
+    function showSlide(name) {
+      current = Math.max(0, names.indexOf(name));
+      names.forEach((id, index) => { document.getElementById(id).hidden = index !== current; });
+      buttons.forEach(button => { if (button.dataset.slide === names[current]) button.setAttribute("aria-current", "step"); else button.removeAttribute("aria-current"); });
+      document.getElementById("page-label").textContent = `0${current + 1} / 03 · ${labels[current]}`;
+    }
+    function navigate(name) { history.replaceState(null, "", `#${name}`); showSlide(name); }
+    buttons.forEach(button => button.addEventListener("click", () => navigate(button.dataset.slide)));
+    window.addEventListener("hashchange", () => showSlide(location.hash.slice(1)));
+    window.addEventListener("keydown", event => {
+      if (event.altKey || event.ctrlKey || event.metaKey || /INPUT|TEXTAREA|SELECT/.test(event.target.tagName) || event.target.isContentEditable) return;
+      const direction = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+      if (direction) { event.preventDefault(); navigate(names[Math.max(0, Math.min(2, current + direction))]); }
+    });
+    showSlide(location.hash.slice(1));
+    const setText = (id, value) => { document.getElementById(id).textContent = value; };
+    const shortText = value => typeof value === "string" && /^[\w .+()@-]{1,100}$/.test(value) ? value : "Not available";
+    const basename = value => typeof value === "string" ? value.split(/[\\/]/).pop().slice(0,100) : "Not available";
+    async function loadReceipt() {
+      const state = document.getElementById("receipt-state");
+      try {
+        const response = await fetch("../artifacts/demo/receipt.public.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("missing receipt");
+        const receipt = await response.json();
+        if (!receipt || typeof receipt !== "object" || Array.isArray(receipt)) throw new Error("invalid receipt");
+        const artifact = receipt.artifact ?? {}, validation = receipt.validation ?? {};
+        const hash = artifact.sha256;
+        setText("result", typeof receipt.ok === "boolean" ? `${receipt.ok ? "Success" : "Failed"} · ${shortText(receipt.action)}` : "Not available");
+        setText("engine", shortText(receipt.engine));
+        setText("artifact", basename(artifact.name));
+        setText("digest", typeof hash === "string" && /^[a-f\d]{64}$/i.test(hash) ? hash : "Not available");
+        setText("composition", `${shortText(validation.compositionStatus)} · ${shortText(validation.compositionProfile)}`);
+        const count = value => Array.isArray(value) ? value.length : Number.isInteger(value) && value >= 0 ? value : "—";
+        const gate = value => value === "passed" ? "PASS" : value === "not_run" ? "NOT RUN" : "Not available";
+        const entries = [
+          ["Validation", `${count(validation.checksPassed)} / ${count(validation.checkCount)} passed`],
+          ["Errors / warnings", `${count(validation.errors)} / ${count(validation.warnings)}`],
+          ["Browser check", gate(receipt.browser_check)],
+          ["Hermes plugin smoke", gate(receipt.hermes_plugin_smoke)]
+        ];
+        for (const [name, result] of entries) {
+          const row = document.createElement("li"), badge = document.createElement("span");
+          row.append(document.createTextNode(name)); badge.textContent = result;
+          if (result === "NOT RUN" || result === "Not available" || result.includes("—")) badge.style.color = "var(--muted)";
+          if (name === "Validation" && Number.isInteger(validation.checksPassed) && Number.isInteger(validation.checkCount) && validation.checksPassed < validation.checkCount) badge.style.color = "var(--coral)";
+          if (name === "Errors / warnings" && (count(validation.errors) > 0 || count(validation.warnings) > 0)) badge.style.color = "var(--coral)";
+          row.append(badge); document.getElementById("checks").append(row);
+        }
+        state.textContent = "Saved receipt loaded · no live model session"; state.dataset.kind = "good";
+      } catch {
+        state.textContent = "Receipt unavailable. Serve the repository locally and generate the demo artifacts first."; state.dataset.kind = "bad";
+      }
+    }
+    loadReceipt();
+  </script>
+</body>
+</html>

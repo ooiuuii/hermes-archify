@@ -20,6 +20,14 @@ This does **not** replace Hermes' existing Mermaid, `architecture-diagram`, or
 `code-wiki` skills. Use it when interactive exploration and a reproducible model
 justify the extra engine. It does not automatically discover runtime topology.
 
+## Demo
+
+[Watch the 75-second demo](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.0/hermes-archify-demo.zh.mp4)
+or [download the example HTML, editable model and receipt](https://github.com/ooiuuii/hermes-archify/releases/tag/v0.1.0).
+The video has Chinese captions and no audio. It shows actual generated HTML,
+saved execution evidence, guided views, directed routes and theme switching.
+It is not a live Hermes model conversation.
+
 ## Install
 
 Requires Hermes with standalone plugins, Python 3.10+, and Node.js 18+ on PATH.

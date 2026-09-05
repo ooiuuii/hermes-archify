@@ -20,21 +20,27 @@ deterministic checks are not a substitute for visual inspection.
 
 ## Capture
 
-Use a 1920 × 1080 browser viewport and record only the demo page surface. Use the
+Use a 16:9 browser viewport and record only the demo page surface. Use the
 visible **Intro**, **Evidence**, and **Get started** buttons or the left/right arrow
 keys. Direct scene links are `/demo/#intro`, `/demo/#proof`, and `/demo/#outro`.
 When the embedded viewer has keyboard focus, click the outer stage before using
 its navigation shortcuts. The generated viewer remains interactive.
 
-Suggested 75-second edit:
+The published 75-second edit uses real 1280 × 720 browser frames, with captions in
+a separate bottom band (no content is covered). Pauses between captures are omitted;
+interactions and the saved artifact are real, not synthesized screenshots.
 
 | Time | Scene |
 | --- | --- |
-| 00–18 | Intro: source → authored model → checked HTML and receipt |
-| 18–58 | Evidence: inspect the actual diagram, then the saved receipt |
-| 58–75 | Get started: repository, explicit installation, scope boundary |
+| 00–15 | Intro: source → authored model → checked HTML and receipt |
+| 15–27 | Evidence: actual saved HTML and its receipt |
+| 27–37 | Guided chapter: render and delivery path |
+| 37–47 | Guided chapter: authoring and validation responsibilities |
+| 47–59 | Directed route: User → Checked HTML, seven nodes and six hops |
+| 59–67 | Theme change on the actual generated page |
+| 67–75 | Get started: public repository and explicit installation |
 
-`captions.zh.srt` provides optional Chinese captions for this suggested pacing.
+`captions.zh.srt` provides Chinese captions aligned to this edit.
 Keep captions separate during capture and adjust them to the final edit. Do not
 cover the artifact or receipt with subtitles. No narration or music is required.
 Do not label saved evidence as a live model run; retain **Recorded execution ·

@@ -1,7 +1,8 @@
 # Demo editions
 
-The current published edition is **V5**: a 3:42 narrated native-vs-plugin
-comparison, with three continuous recordings of actual browser use.
+The current Chinese edition is **V5**: a 3:19 native-vs-plugin comparison with
+Microsoft Xiaoxiao narration and 43 retimed subtitle phrases. Its three continuous
+recordings of actual browser use remain at their original speed and duration.
 [Watch or download v0.1.1](https://github.com/ooiuuii/hermes-archify/releases/tag/v0.1.1).
 The ZIP contains the player and all linked public evidence; extract it and open
 `index.html`. See [V5 production notes](v5/README.md) and

@@ -36,6 +36,8 @@ def execute(action, input_path=None, output_path=None, repo_root=None, *,
     resources = {
         "plugin_root": str(ROOT), "engine_dir": str(engine),
         "schema_path": str(engine / "schemas" / "architecture.schema.json"),
+        "common_schema_path": str(engine / "schemas" / "common.schema.json"),
+        "authoring_guide_path": str(engine / "references" / "authoring-contract.md"),
         "examples_dir": str(engine / "examples"),
     }
     node = node_binary or shutil.which("node")

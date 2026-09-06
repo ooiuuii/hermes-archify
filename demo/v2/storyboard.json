@@ -1,0 +1,61 @@
+{
+  "title": "Hermes × Archify：从一张图，到一个能核查的问题",
+  "edition": "Workflow demo · v2 · 中文解说",
+  "scenes": [
+    {
+      "id": "01-intro", "kind": "intro", "minimum_seconds": 9,
+      "title": "不是从不会画，变成会画。", "subtitle": "而是从看一张图，变成沿着一个问题去检查。",
+      "narration": "Hermes 本来就能画架构图。这个插件增加的，不是画图资格，而是一个更方便交互、检查和追溯的工作流。"
+    },
+    {
+      "id": "02-native", "kind": "native", "minimum_seconds": 15,
+      "title": "原生方案已经很好用。", "subtitle": "内置 architecture-diagram · 官方模板预览，非同题生成实验",
+      "narration": "原生技能按模板直接写单文件 HTML 和 SVG，轻量，也有设计规范。当前模板不使用 JavaScript，没有内建节点追踪。简单静态说明，用它就够了。",
+      "captures": ["native-template.png"]
+    },
+    {
+      "id": "03-question", "kind": "question", "minimum_seconds": 18,
+      "title": "先换问题，再换工具。", "subtitle": "一个文件，回答一个明确的问题。",
+      "narration": "关键用法是别一口气画整个仓库。改问，一次 Hermes 请求怎样从命令行进入模型循环，再分派到工具？控制在八到十二个主要节点，只保留有源码依据的关系。原生方案也受益于这种问法。"
+    },
+    {
+      "id": "04-pipeline", "kind": "pipeline", "minimum_seconds": 13,
+      "title": "把作者化、检查、交付分开。", "subtitle": "Hermes 理解源码；插件连接工具；Archify 校验和渲染。",
+      "narration": "Hermes 先读取源码，编写结构化 JSON。插件调用固定版本的 Archify 返回检查诊断，由 Hermes 修正 JSON，再交付交互网页和回执。Archify 不是另一个自动理解仓库的模型。"
+    },
+    {
+      "id": "05-chapter", "kind": "viewer", "minimum_seconds": 12,
+      "title": "先看一条主线。", "subtitle": "真实已生成产物 · 章节切换分步剪辑 · 非实时模型运行",
+      "narration": "这里是已经由 Hermes 生成、经额外核查修正的真实产物。切换引导章节，只聚焦命令行和模型循环，再看工具接入，避免一屏信息抢重点。",
+      "captures": ["overview.png", "chapter-cli.png", "chapter-tools.png"]
+    },
+    {
+      "id": "06-route", "kind": "viewer", "minimum_seconds": 14,
+      "title": "沿图中的关系，追踪一条路径。", "subtitle": "Hermes CLI → hermes-archify · 编写图上的路径，不是运行时 tracing",
+      "narration": "选择命令行作为起点，Archify 插件作为终点。阅读器给出六个节点、五次跳转。它追踪的是这份图里编写的关系，不是实际运行时调用记录。",
+      "captures": ["route-open.png", "route-from.png", "route-result.png"]
+    },
+    {
+      "id": "07-source", "kind": "viewer", "minimum_seconds": 13,
+      "title": "看到一个判断，就能追问依据。", "subtitle": "查找工具注册表 → 聚焦节点 → 查看固定 revision 的源码引用",
+      "narration": "再查找工具注册表，打开节点的源码引用。文件、行号和版本都能追溯，方便检查解释是否有依据。但引用存在，不等于每一条箭头都解释正确。",
+      "captures": ["search-open.png", "search-result.png", "source-panel.png"]
+    },
+    {
+      "id": "08-boundary", "kind": "checks", "minimum_seconds": 14,
+      "title": "校验全绿，不是正确性保证书。", "subtitle": "本次已保存回执 · 格式 / 组成检查，与语义审查是两件事",
+      "narration": "这次交付九项检查通过，三十四处源码引用可定位。回执也记录文件哈希。但这些不能证明架构理解正确。还要检查关键箭头、实际页面，以及图是否回答了最初的问题。"
+    },
+    {
+      "id": "09-choice", "kind": "choice", "minimum_seconds": 12,
+      "title": "按阅读任务选工具。", "subtitle": "不是替代所有原生出图；是补上交互检查这一层。",
+      "narration": "只需要一张静态说明图，继续用原生技能。需要分章节讲解、追踪路径、核查源码和保留检查回执，再用这个插件。它让核查更方便，不承诺永远画对。"
+    },
+    {
+      "id": "10-outro", "kind": "outro", "minimum_seconds": 7,
+      "title": "一个具体问题，一份可核查的图。", "subtitle": "Hermes × Archify · 独立社区扩展",
+      "narration": "明确问题，生成，检查，再交付。这就是 Hermes 与 Archify 结合的价值。",
+      "url": "github.com/ooiuuii/hermes-archify"
+    }
+  ]
+}

@@ -96,7 +96,7 @@ doctor = json.loads(raw)
 assert doctor["action"] == "doctor"
 assert isinstance(doctor["ok"], bool)
 assert Path(doctor["plugin_root"]).resolve() == root.resolve()
-assert all(doctor[key] for key in ("engine_dir", "schema_path", "examples_dir"))
+assert all(doctor[key] for key in ("engine_dir", "schema_path", "common_schema_path", "authoring_guide_path", "examples_dir"))
 engine_installed = (Path(doctor["engine_dir"]) / "bin" / "archify.mjs").is_file()
 delivered_sha256 = None
 if engine_installed:

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A 原生 vs B 插件 · Hermes Archify 对照演示 V3</title>
+<style>
+  :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0b1118;color:#f6f2e9}
+  *{box-sizing:border-box}body{max-width:1360px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 10px}
+  p{color:#abb6c3;line-height:1.75;font-size:14px}.lanes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .a,.b{padding:14px 18px;border-radius:10px;font-weight:600}.a{background:#281e1b;color:#ffac80;border:1px solid #ffac80}.b{background:#112b27;color:#91edc4;border:1px solid #91edc4}
+  video{width:100%;aspect-ratio:16/9;background:#0b1118;display:block;border-radius:12px;border:1px solid #34414e}
+  a{color:#91edc4}nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}button{border:1px solid #34414e;background:#15202a;color:#f6f2e9;font:inherit;padding:9px 12px;border-radius:7px;cursor:pointer;font-size:13px}
+  button[data-lane=a]{color:#ffac80}button[data-lane=b]{color:#91edc4}button:hover,button:focus-visible{outline:1px solid currentColor}
+  .downloads{display:flex;flex-wrap:wrap;gap:24px}.note{border-left:3px solid #ffac80;padding-left:14px}details{margin-top:18px}summary{color:#abb6c3;cursor:pointer}
+</style>
+<h1>别再把一堆方框，当成架构解释。</h1>
+<p>对照版 V3 · 橙色 A 是原生默认流程，绿色 B 是插件流程；从制作方式到阅读方式，逐项对照。</p>
+<div class="lanes"><div class="a">A 原生：Hermes 直接写 HTML / SVG</div><div class="b">B 插件：Hermes 写 JSON → Archify 校验、渲染</div></div>
+<video controls playsinline preload="metadata" poster="frames/01-hook-00.png" aria-label="原生与插件对照演示视频"><source src="hermes-archify-A-vs-B-v3.zh.mp4" type="video/mp4">请下载 MP4 播放。</video>
+<nav aria-label="视频章节"></nav>
+<div class="downloads"><a href="hermes-archify-A-vs-B-v3.zh.mp4" download>下载新版 MP4</a><a href="captions.zh.srt" download>下载字幕</a><a href="hermes.architecture.html" target="_blank" rel="noopener">打开实际交互图</a><a href="rejection.public.json">查看真实拒绝检查记录</a></div>
+<p class="note">“垃圾图”指无法回答问题、难以核查的结果，不是说原生必然失败。B 增加可执行检查和交互阅读，不能保证架构语义正确。</p>
+<details><summary>画面与证据说明</summary><p>本片是工作流与已验证能力的对照，不是同题生成质量或速度测试。开场缠线图为明确标注的失败模式示意；原生图片为官方模板预览。B 的交互部分是此前真实产物的浏览器操作，分步剪辑，非新的现场生成。缺失节点案例是有意损坏副本后运行的真实结构校验。</p><p>交互与校验功能来自 Archify；我们的独立插件连接 Hermes。使用本地合成语音，不使用 Better Stack 的片段或声音。讲法参考其<a href="https://www.youtube.com/watch?v=iuJszJuiuSg" target="_blank" rel="noopener">问题先行、对照流程、再实际操作</a>的表达方式。旧版视频保留；没有自动对外发布。</p><p><a href="manifest.json">制作记录与哈希</a> · <a href="https://github.com/ooiuuii/hermes-archify" target="_blank" rel="noopener">项目仓库</a></p></details>
+<script>
+  const video=document.querySelector('video');
+  const labels=['开场：图回答了什么','A：原生流程','A：哪里容易不好用','切换到 B：插件流程','同一阅读问题','A/B：找路径','A/B：找依据','A/B：结构检查','A/B：完整对照','为什么需要这个插件'];
+  fetch('manifest.json').then(r=>{if(!r.ok)throw Error('missing manifest');return r.json();}).then(data=>{
+    data.scenes.forEach((scene,index)=>{
+      const button=document.createElement('button');button.dataset.lane=scene.lane??'both';
+      const time=`${Math.floor(scene.start/60)}:${String(Math.floor(scene.start%60)).padStart(2,'0')}`;
+      button.textContent=`${time} ${labels[index]??scene.title}`;
+      button.addEventListener('click',()=>{video.currentTime=scene.start;video.play().catch(()=>{});});
+      document.querySelector('nav').append(button);
+    });
+  }).catch(()=>{document.querySelector('nav').textContent='章节信息暂不可用；可直接播放视频。';});
+</script>
+</html>

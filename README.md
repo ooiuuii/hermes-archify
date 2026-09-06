@@ -5,7 +5,8 @@
 **Hermes understands the source. Archify checks and renders the diagram.**
 
 A small, independent Hermes plugin and skill for editable, interactive architecture
-diagrams. No Hermes core patches, cloud service, API key, or npm install required.
+diagrams. No Hermes core patches, additional cloud service/API key, or npm install
+required. Hermes still uses your configured model/provider to read and interpret code.
 
 ## What it adds
 
@@ -22,11 +23,27 @@ justify the extra engine. It does not automatically discover runtime topology.
 
 ## Demo
 
-[Watch the 75-second demo](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.0/hermes-archify-demo.zh.mp4)
-or [download the example HTML, editable model and receipt](https://github.com/ooiuuii/hermes-archify/releases/tag/v0.1.0).
-The video has Chinese captions and no audio. It shows actual generated HTML,
-saved execution evidence, guided views, directed routes and theme switching.
-It is not a live Hermes model conversation.
+[Watch the latest 3:42 demo — V5](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-native-vs-plugin-v5.zh.mp4)
+or [download the complete local demo package](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-demo-v5.zip).
+The video has Chinese narration and corrected burned-in subtitles. The package
+includes a chapter player, both real diagrams, an editable architecture model,
+recorded checks, and three continuous browser recordings. Extract the ZIP and open
+`index.html`; no login or running Hermes instance is needed to explore saved output.
+
+| Workflow | What the demo actually shows |
+| --- | --- |
+| **A · Native `architecture-diagram`** — 0:19 | A fresh Hermes-generated HTML/SVG, ordinary reading and scrolling, plus source-summary notes. No Archify call. |
+| **B · Hermes Archify plugin** — 1:51 / 2:13 | The previously supervised interactive result: select a path, find a node, inspect pinned file/line references. |
+
+All three product segments use real browser input and continuous capture, not a
+slideshow impersonating interaction. Other scenes explain the workflow. This is
+not a controlled model benchmark or live generation recording. Native diagrams
+can be useful and source-grounded too; structural checks do **not** guarantee that
+either workflow interprets the code correctly.
+
+[Release and standalone downloads](https://github.com/ooiuuii/hermes-archify/releases/tag/v0.1.1)
+· [Verified scope and limitations](docs/verification.md)
+· [Earlier 75-second demo](https://github.com/ooiuuii/hermes-archify/releases/tag/v0.1.0)
 
 ## Install
 
@@ -123,6 +140,13 @@ Don't treat an old file still existing after a failed update as a successful upd
 Archify's `--repo-root` evidence checks are available via `repo_root` for models
 that actually include its supported repository/source fields.
 
+For code diagrams, keep `meta.repository` (the matching GitHub origin and full
+commit SHA) together with component `sources`, and pass `repo_root` to both
+validation and delivery. The skill describes the exact collection steps. Do not
+remove source references merely to make a failed validation pass. Use an
+interactive Hermes session when a terminal command needs approval; an unattended
+query is not a substitute for an approval responder.
+
 No telemetry or network requests occur in this extension's rendering path. Explicit
 engine setup downloads from GitHub. Keep sensitive repository diagrams local unless
 you have permission to share them. Any model/provider used by Hermes has its own
@@ -149,6 +173,10 @@ or full Hermes test run. Browser demo code is development-only, not a new Hermes
 Update the plugin through Hermes' plugin workflow, then check its release notes
 before changing the separately pinned engine. The setup script deliberately refuses
 to overwrite an existing engine; retain a backup before a deliberate engine upgrade.
+Version **0.1.1** keeps Archify **2.16.0** pinned: it improves schema/source-authoring
+guidance and publishes the verified V5 demonstration, without a new renderer or
+Hermes core patch. Restart your Hermes session after updating; if you installed
+the ordinary `archify` skill separately, update that copy too.
 
 ```text
 hermes plugins disable hermes-archify

@@ -1,0 +1,66 @@
+{
+  "title": "别再把一堆方框，当成架构解释。",
+  "layout": "contrast",
+  "output_name": "hermes-archify-A-vs-B-v3.zh.mp4",
+  "editorial_notes": [
+    "A is the inspected native architecture-diagram default workflow; not every possible agent workflow.",
+    "The failure card is an editorial illustration, not a captured failed Hermes generation.",
+    "A/B contrasts reading workflows and documented capabilities, not a same-prompt generation benchmark.",
+    "The missing-node test intentionally damages a copied graph; it is not an observed native defect.",
+    "Archify does not prove semantic correctness; the final caveat applies to both workflows."
+  ],
+  "scenes": [
+    {
+      "id":"01-hook","kind":"contrast-hook","lane":"both","minimum_seconds":10,
+      "title":"画出来了。然后呢？",
+      "narration":"让 Agent 画整个仓库，得到一堆方框和箭头。看着专业。可是，请求到底怎么走？哪个组件从哪儿来的？如果这些都答不上来，再漂亮也是垃圾图。"
+    },
+    {
+      "id":"02-native","kind":"native-flow","lane":"a","minimum_seconds":12,
+      "title":"A：原来的 Hermes，直接把页面画出来。",
+      "narration":"先看橙色的 A，原生方案。Hermes 理解需求，按模板直接写 HTML 和 SVG，你打开页面，再自己读图。它本来就能出网页。问题不是文件格式，而是这套默认流程没有独立的结构校验器和图关系交互。"
+    },
+    {
+      "id":"03-problem","kind":"problem","lane":"a","minimum_seconds":12,
+      "title":"图很多信息，不等于你得到答案。",
+      "narration":"为什么这种直接出图容易不好用？问题太大，模块全挤上去。读图时，你自己找起点、数箭头、翻源码。模型理解和页面绘制混在一起，图画完了，不代表这些判断已经被检查。"
+    },
+    {
+      "id":"04-switch","kind":"switch","lane":"b","minimum_seconds":12,
+      "title":"现在切换到 B。不是同一个出图流程。",
+      "narration":"现在看绿色的 B，我们的插件方案。同样是 Hermes，但不再直接交付模型手写的页面。它先写结构化 JSON，插件交给 Archify 校验，Hermes 按诊断修改，再由引擎渲染和交付。"
+    },
+    {
+      "id":"05-question","kind":"question","lane":"both","minimum_seconds":12,
+      "title":"同一个问题。两种阅读方式。",
+      "narration":"先把问题收窄。只解释请求怎样从命令行进入模型循环，再到工具。最多十二个主要节点。好问题两边都需要。接下来才是差别：A 主要靠你沿线读，B 给你现成的交互检查工具。"
+    },
+    {
+      "id":"06-route","kind":"viewer","lane":"b","minimum_seconds":12,
+      "title":"以前：自己追箭头。现在：选起点和终点。",
+      "narration":"看实际操作。选择 Hermes 命令行，再选 Archify 插件，相关路径就被单独标出来。六个节点，五次跳转。不用在整张图里来回找线。这是在读图，不是运行时调用追踪。",
+      "captures":["route-open.png","route-from.png","route-result.png"]
+    },
+    {
+      "id":"07-source","kind":"viewer","lane":"b","minimum_seconds":12,
+      "title":"以前：再去找代码。现在：从节点查看依据。",
+      "narration":"再看工具注册表。A 的默认模板没有这个来源面板。B 可以查找节点，直接查看固定版本的文件和行号。你不仅看见了一个框，还能检查它为什么应该在这里。",
+      "captures":["search-open.png","search-result.png","source-panel.png"]
+    },
+    {
+      "id":"08-checks","kind":"rejection","lane":"b","minimum_seconds":12,
+      "title":"以前：直接出页面。现在：先检查，再交付。",
+      "narration":"校验不是口号。这里故意把一条连线指向不存在的节点，真实校验返回失败。这类结构错误能被拦下，Hermes 可以据此修正。正常产物则保留检查回执。这是额外的检查步骤，不是保证模型永远理解正确。"
+    },
+    {
+      "id":"09-recap","kind":"recap","lane":"both","minimum_seconds":12,
+      "title":"不是换个配色。是换一套交付方式。",
+      "narration":"所以别把两套方案混在一起。A，模型直接写网页，你来读。B，模型写结构化数据，引擎检查和渲染，你可以追路径、查来源、看回执。对需要讲解和核查的图，B 多出来的正是这些工具。"
+    },
+    {
+      "id":"10-close","kind":"close","lane":"both","minimum_seconds":9,
+      "title":"从“给我一张图”，到“给我一个可核查的解释”。",
+      "narration":"插件没有让 Hermes 突然懂得更多，也不能消灭错误。它让架构解释更容易被检查。简单静态说明，原生仍然够用。需要交互核查，这才是我们接入 Archify 的理由。"
+    }
+  ]
+}

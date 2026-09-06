@@ -1,4 +1,16 @@
-# Recorded demo stage
+# Demo editions
+
+The current published edition is **V5**: a 3:42 narrated native-vs-plugin
+comparison, with three continuous recordings of actual browser use.
+[Watch or download v0.1.1](https://github.com/ooiuuii/hermes-archify/releases/tag/v0.1.1).
+The ZIP contains the player and all linked public evidence; extract it and open
+`index.html`. See [V5 production notes](v5/README.md) and
+[verification boundaries](../docs/verification.md).
+
+The original stage below is retained for provenance. It is the older 75-second,
+silent v0.1.0 demo, **not** the latest native-vs-plugin comparison.
+
+## Original recorded demo stage
 
 This static page is a presentation surface, not a Hermes product interface or a
 live model session. It displays the actual saved HTML and sanitized execution

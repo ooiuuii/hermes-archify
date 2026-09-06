@@ -1,7 +1,7 @@
 ---
 name: archify
 description: "Deliver source-grounded interactive architecture diagrams."
-version: 0.1.0
+version: 0.1.1
 author: ooiuuii
 license: MIT
 platforms: [linux, macos, windows]
@@ -36,7 +36,8 @@ installed copy of this skill can provide ordinary skill discovery and `/archify`
 
 The plugin uses Node.js and the separately downloaded Archify v2.16.0 engine.
 Start with `archify_diagram(action="doctor")`. Its result includes `plugin_root`,
-`engine_dir`, `schema_path`, and `examples_dir`, even when readiness fails.
+`engine_dir`, `schema_path`, `common_schema_path`, `authoring_guide_path`, and
+`examples_dir`, even when readiness fails.
 Use those absolute paths; do not infer a plugin root from a copied skill location.
 
 An absent engine requires the explicit setup step `python setup_engine.py` from
@@ -69,17 +70,23 @@ needed for the requested destination; delivery does not create it for you.
 1. Establish the repository or system scope and the requested artifact destination.
    For existing work, preserve the user's model and output unless an update is
    requested. Run `doctor` and address readiness errors before rendering.
-2. Read the returned `schema_path` with `read_file`; use `search_files` in the
+2. Read the returned `schema_path` and `common_schema_path` with `read_file`; use `search_files` in the
    returned `examples_dir` to locate a relevant architecture example. Follow the
    pinned schema instead of guessing fields or borrowing a different diagram kind.
 3. For repository diagrams, use `search_files` and `read_file` on actual source:
    entry points, component boundaries, dependency/configuration declarations, and
    relevant call sites. Distinguish direct evidence from inferred relationships.
    Existing descriptions and filenames alone do not establish runtime connections.
+   Establish the real Git origin and revision using the repository-evidence steps
+   below before writing component sources. Read bounded source ranges, not entire
+   large modules; expand only when a relationship needs more evidence.
 4. Author the architecture JSON with `write_file`. Use the schema's supported source
    reference fields to make components traceable, and retain a concise explanation
    of evidence and uncertainty. Do not invent references to make validation pass.
    Prefer a useful bounded view; do not turn a small request into a full-repo audit.
+   Start with a left-to-right spine and short branches. Read the returned
+   `authoring_guide_path` for spacing, label and route contracts before laying out
+   a diagram with several branches; preserve labels and relationships during repair.
 5. Call `validate` with the absolute input path and source root. Read all returned
    diagnostics, make relevant corrections, and repeat after changes. Do not suppress
    a failure by removing real architectural relationships or evidence.
@@ -94,6 +101,53 @@ needed for the requested destination; delivery does not create it for you.
 8. Report the delivered files and the checks actually performed. Separate deterministic
    engine/reference checks, browser/visual checks, and the source interpretation.
    If a check was not performed, say so rather than implying a fully verified result.
+
+## Repository evidence before authoring
+
+For a GitHub-backed code diagram, `components[].sources` and `meta.repository`
+belong together. `repo_root` alone does not fill the metadata for you.
+
+1. Run read-only Git commands against the intended checkout: `git -C <root>
+   rev-parse --show-toplevel`, `git -C <root> rev-parse HEAD`, and `git -C <root>
+   remote get-url origin`. Check `git -C <root> status --short` too. Use native
+   absolute paths on Windows. Do not guess a revision or change the remote.
+2. Copy the observed full 40-character SHA into `meta.repository.revision` and
+   normalize the matching GitHub origin to `https://github.com/OWNER/REPO` for
+   `meta.repository.url`. A fork's origin must remain that fork, not its upstream.
+   Never copy credentials from a remote URL into the model. If origin is not a
+   supported GitHub URL, report the limitation rather than fabricating metadata.
+3. Each source uses a repo-relative forward-slash `path`, optional positive
+   `line` and `end_line`, and optional `label`. The source path and range must
+   exist at the pinned revision. If the working tree has relevant edits, read
+   the pinned blob with `git show SHA:path` for commit-bound claims and describe
+   uncommitted observations separately. Do not imply they are in that commit.
+4. Include the metadata and sources in the FIRST model, then pass the Git top-level
+   directory as `repo_root` to BOTH validate and deliver. Keep another repository's
+   plugin files out of this repository's sources; record their separate provenance
+   in the source notes.
+
+The shape is `"repository": {"url": "https://github.com/OWNER/REPO",
+"revision": "FULL_SHA_FROM_GIT"}` under `meta`, and for example
+`"sources": [{"path": "src/main.py", "line": 12, "end_line": 20}]` on a component.
+These are placeholders, not evidence; replace all values with observed ones.
+
+If validation says `repository-required`, add the verified metadata. Do not delete
+real sources, move all evidence into prose, or drop `repo_root` just to obtain a
+successful receipt. The engine verifies origin, pinned files and line ranges;
+it does not establish that the code has the meaning asserted by your arrows.
+
+## File-tool and approval handling
+
+- Use `write_file` or `patch` for the model. `read_file` may return line-numbered
+  display text; do not feed that display directly to `json.loads`. For an approved
+  raw-file operation, use a real UTF-8 file reader instead.
+- On Windows, do not repeatedly retry a `search_files` failure that rewrites paths
+  to `/c/...` or corrupts regex escapes. Use bounded `read_file` calls or a native
+  read-only search on the same authorized files. This is not permission to retry a
+  command denied by safety approval using another tool.
+- Keep terminal safety approvals enabled. A noninteractive CLI with no approval
+  responder can wait and then deny a command. Report the approval blocker; do not
+  disable approval, claim it ran, or rephrase a denied action to evade the guard.
 
 ## Pitfalls
 
@@ -113,5 +167,7 @@ Inspect the returned inline `receipt` and confirm the artifact paths in `files`
 exist using the available file tools. The bridge does not persist a separate
 receipt file; save one only if the user requests it.
 For a repository claim, spot-check the referenced source and any stated uncertainty.
+Require the successful delivery's `receipt.evidence.verified` to be true; check its
+`repository`, `revision`, and positive `references` against the authored model.
 Record browser and visual inspection separately; do not upgrade an unperformed check
 to a pass. Return useful artifact links without dumping the entire receipt.

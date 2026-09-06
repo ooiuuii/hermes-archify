@@ -217,6 +217,58 @@ class RealEngineTests(unittest.TestCase):
         if not cls.node or not (cls.engine / "bin" / "archify.mjs").is_file():
             raise unittest.SkipTest("pinned engine and Node are not installed; run the documented engine setup")
 
+    def test_doctor_exposes_readable_pinned_authoring_resources(self):
+        result = bridge.execute("doctor", engine_dir=str(self.engine), node_binary=str(self.node))
+        self.assertTrue(result["ok"], result)
+        for key in ("schema_path", "common_schema_path", "authoring_guide_path"):
+            self.assertTrue(Path(result[key]).is_file(), result)
+
+    def test_repository_sources_require_metadata_and_survive_delivery(self):
+        if not shutil.which("git"):
+            self.skipTest("Git is required for real repository-evidence validation")
+        with tempfile.TemporaryDirectory(prefix="hermes-archify-source-") as directory:
+            root = Path(directory).resolve()
+            repository = root / "fixture-repo"
+            repository.mkdir()
+            # Local fixture only: this test never fetches or claims a live project.
+            def git(*args):
+                return subprocess.check_output(
+                    ["git", "-C", str(repository), *args], text=True, encoding="utf-8"
+                ).strip()
+            git("init", "--quiet")
+            git("remote", "add", "origin", "https://github.com/example/archify-evidence-fixture.git")
+            (repository / "entry.py").write_text("def main():\n    return 'fixture'\n", encoding="utf-8")
+            git("add", "entry.py")
+            git("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+                "-c", "commit.gpgsign=false", "-c", "core.hooksPath=" + str(root / "no-hooks"),
+                "commit", "--quiet", "-m", "Fixture source")
+            revision = git("rev-parse", "HEAD")
+            model = json.loads(EXAMPLE.read_text(encoding="utf-8"))
+            reference = {"path": "entry.py", "line": 1, "end_line": 2}
+            model["components"][0]["sources"] = [reference]
+            source, output = root / "model.json", root / "model.html"
+            options = {"input_path": str(source), "repo_root": str(repository),
+                       "engine_dir": str(self.engine), "node_binary": str(self.node)}
+            source.write_text(json.dumps(model), encoding="utf-8")
+            failure = bridge.execute("validate", **options)
+            self.assertFalse(failure["ok"], failure)
+            self.assertIn("repository-evidence/repository-required", json.dumps(failure))
+            model["meta"]["repository"] = {
+                "url": "https://github.com/example/archify-evidence-fixture", "revision": revision,
+            }
+            source.write_text(json.dumps(model), encoding="utf-8")
+            checked = bridge.execute("validate", **options)
+            self.assertTrue(checked["ok"], checked)
+            result = bridge.execute("deliver", output_path=str(output), **options)
+            self.assertTrue(result["ok"], result)
+            self.assertEqual(result["receipt"]["evidence"], {
+                "verified": True, "repository": model["meta"]["repository"]["url"],
+                "revision": revision, "references": 1,
+            })
+            self.assertEqual(json.loads(source.read_text())["components"][0]["sources"], [reference])
+            self.assertIn(f"/blob/{revision}/entry.py#L1-L2", output.read_text(encoding="utf-8"))
+            self.assertEqual(result["receipt"]["artifact"], fingerprint(output.read_bytes()))
+
     def test_real_delivery_then_invalid_update_keeps_last_good_bytes(self):
         with tempfile.TemporaryDirectory(prefix="hermes-archify-real-") as directory:
             root = Path(directory).resolve()

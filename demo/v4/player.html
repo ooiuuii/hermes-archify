@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>两段连续操作 · Hermes Archify 演示 V4</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0b1118;color:#f3f1e8}
+    *{box-sizing:border-box}body{max-width:1320px;margin:auto;padding:32px 24px 48px}
+    h1{font-size:clamp(25px,4vw,38px);line-height:1.25;letter-spacing:-.03em;margin:8px 0 14px}
+    h2{font-size:17px;margin:0 0 14px}p{font-size:14px;line-height:1.8;color:#b2bdc9;margin:10px 0}
+    .eyebrow{font-size:12px;letter-spacing:.14em;color:#91edc4}.intro{max-width:940px}
+    .lanes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 16px}
+    .lane{padding:15px 18px;border:1px solid;border-radius:10px;font-size:14px;line-height:1.7}
+    .lane strong{display:block;font-size:12px;letter-spacing:.08em;margin-bottom:4px}
+    .a{color:#ffac80;background:#281e1b;border-color:#704834}.b{color:#91edc4;background:#112b27;border-color:#346854}
+    video{display:block;width:100%;aspect-ratio:16/9;background:#080c11;border:1px solid #34414e;border-radius:12px}
+    a{color:#91edc4;text-underline-offset:3px}a:hover{color:#c8ffe7}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #f3f1e8;outline-offset:4px}
+    .chapters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 8px}
+    button{border:1px solid #34414e;background:#15202a;color:#f3f1e8;font:inherit;font-size:13px;line-height:1.5;padding:9px 12px;border-radius:7px;cursor:pointer;text-align:left}
+    button[data-lane="a"]{color:#ffac80}button[data-lane="b"]{color:#91edc4}button:hover{background:#23333f}
+    .status{font-size:12px;min-height:22px;margin:0 0 18px;color:#91a0af}
+    .downloads{display:flex;flex-wrap:wrap;gap:12px 22px;font-size:14px;margin:18px 0 24px}
+    .boundary{border-left:3px solid #ffac80;padding:2px 0 2px 16px;margin:24px 0}
+    details{padding:20px 0;border-top:1px solid #293642}summary{cursor:pointer;font-weight:600;font-size:15px}
+    .evidence{display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;margin-top:22px}
+    ul{padding-left:20px;font-size:14px;line-height:1.9;color:#b2bdc9}li{margin:5px 0}.foot{font-size:12px;color:#91a0af}
+    @media(max-width:700px){body{padding:22px 16px 36px}.lanes,.evidence{grid-template-columns:1fr}.lane{padding:12px 15px}}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">HERMES ARCHIFY · V4 · 本地演示</div>
+      <h1>别只看截图。看问题怎样被回答。</h1>
+      <p class="intro">第 6、7 段换成真实浏览器的连续操作录制：找路径、查来源。两段保持原速，配用原旁白；其余八段沿用 V3 的说明画面和真实静帧素材。这不是一场新的模型生成，也不宣称由人手动操作。</p>
+    </header>
+
+    <div class="lanes" aria-label="两种工作流">
+      <div class="lane a"><strong>A · 原生默认流程</strong>Hermes 直接编写 HTML / SVG</div>
+      <div class="lane b"><strong>B · 独立插件流程</strong>Hermes 写 JSON → Archify 检查 → Hermes 修正 → 交付</div>
+    </div>
+
+    <video controls playsinline preload="metadata" poster="captures/overview.png" aria-label="Hermes Archify V4 中文演示，含烧录字幕">
+      <source src="hermes-archify-continuous-demo-v4.zh.mp4" type="video/mp4">
+      浏览器无法播放此视频，请使用下方链接下载 MP4。
+    </video>
+    <nav class="chapters" aria-label="视频章节"></nav>
+    <p class="status" role="status">章节按钮只跳转位置，不自动开始播放。</p>
+
+    <div class="downloads">
+      <a href="hermes-archify-continuous-demo-v4.zh.mp4" download>下载 V4 视频</a>
+      <a href="captions.zh.srt" download>SRT 字幕</a>
+      <a href="captions.zh.ass" download>ASS 字幕</a>
+      <a href="hermes.architecture.html" target="_blank" rel="noopener">自己操作交互图</a>
+      <a href="native-template.html" target="_blank" rel="noopener">查看原生官方模板</a>
+    </div>
+
+    <p class="boundary">这里对照的是工作流和阅读方式，不是同题生成的 A/B 质量或速度测试。图中路径不是运行时追踪；校验和引用范围检查也不保证架构语义真实。</p>
+
+    <details>
+      <summary>画面来源与可核查材料</summary>
+      <p>连续录制中的鼠标指示和点击高亮由实际输入事件驱动，是录制辅助层；不是后期按脚本画出的假点击。两段操作的是已存在的交互产物，不是新的 Hermes 会话。其他八段保留 V3 剪辑，其中原生画面是官方模板预览，开场失败模式是示意图。</p>
+      <p>旁白沿用本地合成语音。缺失节点案例是有意损坏图副本后进行的真实结构检查，不是一次原生生成失败。交互阅读器和校验能力来自 Archify；本项目的独立插件负责连接 Hermes。该演示不代表新版本发布。</p>
+      <div class="evidence">
+        <section aria-labelledby="recordings-title">
+          <h2 id="recordings-title">两段原始录制</h2>
+          <ul>
+            <li>找路径：<a href="recordings/06-route.mp4">原片</a> · <a href="recordings/06-route.json">录制记录</a></li>
+            <li>查来源：<a href="recordings/07-source.mp4">原片</a> · <a href="recordings/07-source.json">录制记录</a></li>
+            <li><a href="captures/overview.png">交互图概览参考静帧</a></li>
+          </ul>
+        </section>
+        <section aria-labelledby="checks-title">
+          <h2 id="checks-title">制作与检查记录</h2>
+          <ul>
+            <li><a href="manifest.json">V4 制作清单、时间轴与哈希</a></li>
+            <li><a href="receipt.public.json">已交付图的检查回执</a></li>
+            <li><a href="rejection.public.json">结构拒绝检查记录</a>（如随包提供）</li>
+          </ul>
+        </section>
+      </div>
+      <p class="foot">旧版产物保持不变。本页无远程库、无自动播放；打开交互图等参考文件后，其自身的外部字体或来源链接仍可能访问网络。</p>
+    </details>
+  </main>
+
+  <script id="manifest-data" type="application/json">__DEMO_MANIFEST_JSON__</script>
+  <script>
+    'use strict';
+    const video = document.querySelector('video');
+    const chapters = document.querySelector('.chapters');
+    const status = document.querySelector('.status');
+    const labels = {
+      '01-hook': '开场：图回答了什么',
+      '02-native': 'A：原生流程',
+      '03-problem': 'A：阅读难点',
+      '04-switch': '切换到 B：插件流程',
+      '05-question': '同一个阅读问题',
+      '06-route': '连续操作：找路径',
+      '07-source': '连续操作：查来源',
+      '08-checks': '有意损坏副本的结构检查',
+      '09-recap': '工作流对照',
+      '10-close': '为什么需要这个插件'
+    };
+    try {
+      const manifest = JSON.parse(document.getElementById('manifest-data').textContent);
+      if (!Array.isArray(manifest.scenes) || !manifest.scenes.length) throw new Error('Missing scenes');
+      manifest.scenes.forEach(scene => {
+        const start = Number(scene.start);
+        if (!Number.isFinite(start) || start < 0) throw new Error('Invalid chapter time');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.lane = scene.lane === 'a' || scene.lane === 'b' ? scene.lane : 'both';
+        const time = `${Math.floor(start / 60)}:${String(Math.floor(start % 60)).padStart(2, '0')}`;
+        const label = labels[scene.id] || scene.title || scene.id;
+        button.textContent = `${time} ${label}`;
+        button.addEventListener('click', () => {
+          const seek = () => {
+            video.currentTime = start;
+            status.textContent = `已跳到 ${time} ${label}；播放状态保持不变。`;
+          };
+          if (video.readyState >= 1) seek();
+          else video.addEventListener('loadedmetadata', seek, {once: true});
+        });
+        chapters.append(button);
+      });
+    } catch (_) {
+      chapters.replaceChildren();
+      status.textContent = '章节数据不可用；仍可使用视频控件播放。请打开合成产物中的 player.html，而不是源模板。';
+    }
+  </script>
+</body>
+</html>

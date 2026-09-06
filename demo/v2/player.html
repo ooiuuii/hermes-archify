@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hermes × Archify · 工作流演示 v2</title>
+<style>
+  :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0c141c;color:#f3f1e8}
+  *{box-sizing:border-box}body{max-width:1280px;margin:auto;padding:28px 24px 48px}
+  header{display:flex;justify-content:space-between;gap:16px;align-items:center}
+  h1{font-size:24px;font-weight:600;margin:0 0 10px}p{color:#adbac6;line-height:1.8;font-size:14px}
+  video{display:block;width:100%;aspect-ratio:16/9;background:#0c141c;border:1px solid #334550;border-radius:14px;margin-top:20px}
+  a{color:#b5e3cd}button{font:inherit;background:#172530;color:#f3f1e8;border:1px solid #334550;border-radius:8px;padding:10px 14px;cursor:pointer}
+  button:hover,button:focus-visible{border-color:#b5e3cd;color:#b5e3cd}nav{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+  details{border-top:1px solid #334550;padding-top:16px}summary{cursor:pointer;color:#b5e3cd}
+  .note{border-left:3px solid #ffa18e;padding-left:16px}.links{display:flex;flex-wrap:wrap;gap:24px;margin:20px 0}
+</style>
+<header><div><h1>Hermes × Archify：从一张图，到一个能核查的问题</h1><p>新版演示 · 中文合成解说＋字幕 · 原生对比 / 提问方法 / 真实产物交互</p></div><a href="hermes-archify-workflow-v2.zh.mp4" download>下载 MP4</a></header>
+<video controls playsinline preload="metadata" poster="frames/01-intro-00.png" aria-label="Hermes Archify 工作流演示视频">
+  <source src="hermes-archify-workflow-v2.zh.mp4" type="video/mp4">
+  你的浏览器无法播放这个视频，请使用上方下载链接。
+</video>
+<nav aria-label="演示章节"></nav>
+<p class="note">画面来自真实浏览器操作，按步骤剪辑并停留讲解；不是连续录屏或新的现场模型运行。原生部分展示官方模板，不是同题 A/B 生成实验。交互功能来自 Archify，插件负责连接 Hermes。校验通过不保证架构理解正确。</p>
+<div class="links"><a href="hermes.architecture.html" target="_blank" rel="noopener">打开实际交互图 ↗</a><a href="captions.zh.srt" download>下载中文字幕</a><a href="manifest.json">查看制作与产物记录</a><a href="https://github.com/ooiuuii/hermes-archify" target="_blank" rel="noopener">项目仓库 ↗</a></div>
+<details><summary>方法来源与证据边界</summary><p>Hermes 原生 architecture-diagram 已有 HTML＋SVG 和设计规范；当前模板不使用 JavaScript。插件增加固定引擎调用、交互阅读、结构化检查与回执，不声称更快、更便宜或一定更准确。</p><p>方法参考：Better Stack 的 <a href="https://www.youtube.com/watch?v=iuJszJuiuSg&t=94s" target="_blank" rel="noopener">具体问题与小范围出图</a>，以及 <a href="https://www.youtube.com/watch?v=iuJszJuiuSg&t=353s" target="_blank" rel="noopener">合法图仍可能描述错系统</a>。本片未使用原视频片段、音轨或他人的声音。</p><p>图中有向路径不是运行时追踪；源码引用验证不是语义认证。演示使用已核查的本机候选版本，公开安装与发布状态以仓库说明为准。没有自动上传或发布本视频。</p></details>
+<script>
+  const video = document.querySelector('video');
+  const titles = ['原生已有能力','原生模板对比','先换问题','生成工作流','章节导览','有向路径','源码引用','校验边界','怎样选择','总结'];
+  fetch('manifest.json').then(r => {if(!r.ok) throw Error('missing manifest');return r.json();}).then(manifest => {
+    manifest.scenes.forEach((scene,index) => {
+      const button = document.createElement('button');
+      const time = `${Math.floor(scene.start/60)}:${String(Math.floor(scene.start%60)).padStart(2,'0')}`;
+      button.textContent = `${time} ${titles[index] ?? scene.id}`;
+      button.addEventListener('click', () => {video.currentTime=scene.start;video.play().catch(()=>{});});
+      document.querySelector('nav').append(button);
+    });
+  }).catch(() => {document.querySelector('nav').textContent='章节信息暂不可用，视频仍可直接播放。';});
+</script>
+</html>

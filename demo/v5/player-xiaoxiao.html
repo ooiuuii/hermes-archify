@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>晓晓中文版 · Hermes Archify V5</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0b1118;color:#f3f1e8}
+    *{box-sizing:border-box}body{max-width:1320px;margin:auto;padding:32px 24px 48px}
+    h1{font-size:clamp(25px,4vw,38px);line-height:1.25;letter-spacing:-.03em;margin:8px 0 14px}
+    h2{font-size:17px;margin:0 0 14px}p{font-size:14px;line-height:1.8;color:#b2bdc9;margin:10px 0}
+    .eyebrow{font-size:12px;letter-spacing:.14em;color:#91edc4}.intro{max-width:1040px}
+    .lanes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 16px}
+    .lane{padding:15px 18px;border:1px solid;border-radius:10px;font-size:14px;line-height:1.7}
+    .lane strong{display:block;font-size:14px;letter-spacing:.02em;margin-bottom:4px}
+    .a{color:#ffac80;background:#281e1b;border-color:#704834}.b{color:#91edc4;background:#112b27;border-color:#346854}
+    video{display:block;width:100%;aspect-ratio:16/9;background:#080c11;border:1px solid #34414e;border-radius:12px}
+    a{color:#91edc4;text-underline-offset:3px}a:hover{color:#c8ffe7}.a a{color:#ffac80}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #f3f1e8;outline-offset:4px}
+    .chapters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 8px}
+    button{border:1px solid #34414e;background:#15202a;color:#f3f1e8;font:inherit;font-size:13px;line-height:1.5;padding:9px 12px;border-radius:7px;cursor:pointer;text-align:left}
+    button[data-lane="a"]{color:#ffac80}button[data-lane="b"]{color:#91edc4}button:hover{background:#23333f}
+    .status{font-size:12px;min-height:22px;margin:0 0 18px;color:#91a0af}
+    .downloads{display:flex;flex-wrap:wrap;gap:12px 22px;font-size:14px;margin:18px 0 24px}
+    .boundary{border-left:3px solid #ffac80;padding:2px 0 2px 16px;margin:24px 0}
+    details{padding:20px 0;border-top:1px solid #293642}summary{cursor:pointer;font-weight:600;font-size:15px}
+    .evidence{display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;margin-top:22px}
+    ul{padding-left:20px;font-size:14px;line-height:1.9;color:#b2bdc9}li{margin:5px 0}.foot{font-size:12px;color:#91a0af}
+    @media(max-width:700px){body{padding:22px 16px 36px}.lanes,.evidence{grid-template-columns:1fr}.lane{padding:12px 15px}}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">HERMES ARCHIFY · V5 · 晓晓中文版 · 3:19</div>
+      <h1>两种真实产物，两种阅读方式。</h1>
+      <p class="intro">A 是已记录的 Hermes 原生 architecture-diagram 技能真实生成结果，不是官方空白模板；B 是先前经过监督、检查和交付的插件产物。三个产品段保留原速连续录屏。此版换用晓晓中文神经语音，文案与画面内容不变，43 条字幕按实际语音时间重新对齐。</p>
+    </header>
+
+    <div class="lanes" aria-label="两种工作流">
+      <div class="lane a"><strong>A · Hermes 原生 architecture-diagram</strong>直接生成 HTML / SVG，普通网页阅读；未调用 Archify。<br>原生方案能做好静态说明。<br><a href="native/hermes-native.architecture.html" target="_blank" rel="noopener">打开原生 HTML</a> · <a href="native/hermes-native.png" target="_blank" rel="noopener">查看 PNG</a></div>
+      <div class="lane b"><strong>B · Hermes Archify 独立插件</strong>Hermes 写 JSON → Archify 校验 → 修正 → 引擎渲染。<br>提供路径、来源与检查回执。<br><a href="hermes.architecture.html" target="_blank" rel="noopener">打开插件交互 HTML</a></div>
+    </div>
+
+    <video controls playsinline preload="metadata" poster="captures/overview.png" aria-label="Hermes Archify V5 晓晓中文演示，含烧录字幕">
+      <source src="hermes-archify-native-vs-plugin-v5.zh.mp4" type="video/mp4">
+      浏览器无法播放此视频，请使用下方链接下载 MP4。
+    </video>
+    <nav class="chapters" aria-label="视频章节"></nav>
+    <p class="status" role="status">章节按钮只跳转位置，不自动开始播放。</p>
+    <div class="downloads">
+      <a href="hermes-archify-native-vs-plugin-v5.zh.mp4" download>下载晓晓中文版</a>
+      <a href="captions.zh.srt" download>SRT 字幕</a>
+      <a href="captions.zh.ass" download>ASS 字幕</a>
+      <a href="https://github.com/ooiuuii/hermes-archify" target="_blank" rel="noopener">项目与安装说明</a>
+    </div>
+    <p class="boundary">这不是同题、同条件的质量、速度或成本 benchmark，也不是现场 LLM 生成过程的录屏。A、B 均沿用此前已记录的生成结果；此次配音替换未重新运行模型。这里对照展示的工作流与阅读能力，不据此判断哪个模型更强。图中路径不是运行时追踪；校验和引用范围检查不保证语义真实。</p>
+
+    <details>
+      <summary>画面来源与可核查材料</summary>
+      <p>第 2、6、7 段沿用已批准 V5 的连续浏览器实录；其余七段保留说明画面，根据新旁白调整时长。三段实录在最终烧录字幕前的视频压缩数据哈希均与旧版相同。连续画面保留完整视口，不裁切、不变速、不定格尾帧凑时长；鼠标提示由真实输入事件驱动，不宣称人工操作。</p>
+      <p>“原生默认流程／模板”的原旁白描述所检查技能的默认能力，不代表所有可能的定制 Hermes 流程。A 的源码摘要与普通来源链接也能辅助核查；这里讨论的是默认图关系交互，不是 A 能否引用源码。开场失败模式是示意图，不是本次原生生成失败。缺失节点案例是有意损坏副本后的真实结构检查，不是 A 的错误。旁白为 Microsoft Edge 晓晓（zh-CN-XiaoxiaoNeural）合成语音，默认语速与音高，不做克隆或变速；交互阅读器与校验来自 Archify，独立插件负责连接 Hermes。</p>
+      <div class="evidence">
+        <section aria-labelledby="native-title">
+          <h2 id="native-title">A · 已记录的原生生成</h2>
+          <ul>
+            <li><a href="native/hermes-native.architecture.html">HTML / SVG 网页</a> · <a href="native/hermes-native.png">PNG 截图</a></li>
+            <li><a href="native/run.public.json">公开生成记录</a> · <a href="native/source-notes.md">源码依据与范围说明</a></li>
+            <li><a href="recordings/02-native.mp4">连续录制原片</a> · <a href="recordings/02-native.json">录制记录</a></li>
+          </ul>
+        </section>
+        <section aria-labelledby="plugin-title">
+          <h2 id="plugin-title">B · 先前经监督的插件产物</h2>
+          <ul>
+            <li>找路径：<a href="recordings/06-route.mp4">连续原片</a> · <a href="recordings/06-route.json">录制记录</a></li>
+            <li>查来源：<a href="recordings/07-source.mp4">连续原片</a> · <a href="recordings/07-source.json">录制记录</a></li>
+            <li><a href="hermes.architecture.html">交互图</a> · <a href="receipt.public.json">交付检查回执</a></li>
+            <li><a href="rejection.public.json">有意损坏副本的结构拒绝记录</a>（如随包提供）</li>
+          </ul>
+        </section>
+      </div>
+      <p><a href="manifest.json">晓晓版制作清单、时间轴与哈希</a> · <a href="provenance/previous-v5.manifest.json">旧中文 V5 基线</a> · <a href="QUALITY-CHECK.md">成片检查</a> · <a href="narration.public.json">配音记录</a> · <a href="SHA256SUMS.txt">成片 SHA-256</a></p>
+      <p class="foot">Teknium 所示图的来源仍待独立证据确认；本演示不替该图做来源归因或背书。中文演示已更换晓晓配音；插件版本仍为 v0.1.1，英文版不变。本播放器无远程库、无自动播放；参考 HTML 的外部字体或来源链接仍可能访问网络。</p>
+    </details>
+  </main>
+
+  <script id="manifest-data" type="application/json">__DEMO_MANIFEST_JSON__</script>
+  <script>
+    'use strict';
+    const video = document.querySelector('video');
+    const chapters = document.querySelector('.chapters');
+    const status = document.querySelector('.status');
+    const labels = {
+      '01-hook': '开场：图回答了什么', '02-native': 'A：原生生成 · 连续阅读',
+      '03-problem': '阅读难点', '04-switch': '切换到 B：插件流程',
+      '05-question': '同一个阅读问题', '06-route': 'B 连续操作：找路径',
+      '07-source': 'B 连续操作：查来源', '08-checks': '有意损坏副本的结构检查',
+      '09-recap': '工作流对照', '10-close': '为什么需要这个插件'
+    };
+    try {
+      const manifest = JSON.parse(document.getElementById('manifest-data').textContent);
+      if (!Array.isArray(manifest.scenes) || manifest.scenes.length !== 10) throw new Error('Missing scenes');
+      manifest.scenes.forEach(scene => {
+        const start = Number(scene.start);
+        if (!Number.isFinite(start) || start < 0) throw new Error('Invalid chapter time');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.lane = scene.lane === 'a' || scene.lane === 'b' ? scene.lane : 'both';
+        const time = `${Math.floor(start / 60)}:${String(Math.floor(start % 60)).padStart(2, '0')}`;
+        const label = labels[scene.id] || scene.title || scene.id;
+        button.textContent = `${time} ${label}`;
+        button.addEventListener('click', () => {
+          const seek = () => {
+            video.currentTime = start;
+            status.textContent = `已跳到 ${time} ${label}；播放状态保持不变。`;
+          };
+          if (video.readyState >= 1) seek();
+          else video.addEventListener('loadedmetadata', seek, {once: true});
+        });
+        chapters.append(button);
+      });
+    } catch (_) {
+      chapters.replaceChildren();
+      status.textContent = '章节数据不可用；仍可使用视频控件。请打开合成产物的 player.html，而不是源模板。';
+    }
+  </script>
+</body>
+</html>
+
+

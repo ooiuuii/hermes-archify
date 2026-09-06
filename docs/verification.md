@@ -57,13 +57,24 @@ by this release verification.
 
 ## Demo verification
 
-V5 is 3:42, 1920 × 1080 at 30 fps with Chinese narration and 43 burned-in subtitles.
-Complete FFmpeg decoding and browser playback passed. Subtitle regression tests
-passed. Only the native segment changed from V4; the other nine scene segments
-remain identical. Original final MP4 SHA-256:
+The current Chinese V5 edition is **3:19 (199.2 seconds)**, 1920 × 1080 at 30 fps,
+with Microsoft Edge `zh-CN-XiaoxiaoNeural` (Xiaoxiao) narration in all ten scenes.
+The normal synthesis rate and pitch are retained; no voice cloning or time
+stretching was used. Its 43 burned-in subtitle phrases match the approved script
+and are retimed from actual WordBoundary events, including fixed scene delays.
+Complete FFmpeg decoding passed; subtitle text, boundary mapping, non-overlap and
+audio end margins were independently checked. The same three continuous browser
+recordings retain their original duration and speed. No new model run or browser
+capture was made, and the English Andrew edition is unchanged. Current MP4 SHA-256:
+`67f674cedb25aac7398c4b1060339ec6ea3b39b5e04e4627a4bcde4bea2e654f`.
+
+Historically, the original 3:42 V5 edit changed only the native segment from V4;
+the other nine scene segments remained identical. That original edit passed
+complete FFmpeg decoding, browser playback and subtitle regression tests. Its
+historical MP4 SHA-256 was:
 `5f38f60079b7b3f261ddf52561578efd44af3fa31436be7774d4ef6023c74c09`.
 
-A is a new isolated Hermes run using the unmodified native `architecture-diagram`
+A came from an isolated Hermes run using the unmodified native `architecture-diagram`
 skill, without Archify. It generated a real standalone HTML/SVG and source notes;
 its PNG is a browser screenshot. B is the earlier supervised plugin result.
 Three product segments are continuous recordings of browser input, not recordings

@@ -23,17 +23,19 @@ justify the extra engine. It does not automatically discover runtime topology.
 
 ## Demo
 
-[Watch the latest 3:42 demo — V5](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-native-vs-plugin-v5.zh.mp4)
-or [download the complete local demo package](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-demo-v5.zip).
-The video has Chinese narration and corrected burned-in subtitles. The package
-includes a chapter player, both real diagrams, an editable architecture model,
+[Watch the Chinese V5 demo — Xiaoxiao narration (3:19)](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-native-vs-plugin-v5.zh.mp4)
+· [English edition — Andrew narration (4:06)](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-native-vs-plugin-v5.en.mp4)
+· [Complete Chinese local demo package](https://github.com/ooiuuii/hermes-archify/releases/download/v0.1.1/hermes-archify-demo-v5.zip).
+The Chinese edition uses Microsoft Xiaoxiao narration in all ten scenes, with the
+same 43 subtitle phrases retimed to actual speech boundaries. The package includes
+a chapter player, both real diagrams, an editable architecture model,
 recorded checks, and three continuous browser recordings. Extract the ZIP and open
 `index.html`; no login or running Hermes instance is needed to explore saved output.
 
 | Workflow | What the demo actually shows |
 | --- | --- |
-| **A · Native `architecture-diagram`** — 0:19 | A fresh Hermes-generated HTML/SVG, ordinary reading and scrolling, plus source-summary notes. No Archify call. |
-| **B · Hermes Archify plugin** — 1:51 / 2:13 | The previously supervised interactive result: select a path, find a node, inspect pinned file/line references. |
+| **A · Native `architecture-diagram`** — 0:16 | A fresh Hermes-generated HTML/SVG, ordinary reading and scrolling, plus source-summary notes. No Archify call. |
+| **B · Hermes Archify plugin** — 1:38 / 2:00 | The previously supervised interactive result: select a path, find a node, inspect pinned file/line references. |
 
 All three product segments use real browser input and continuous capture, not a
 slideshow impersonating interaction. Other scenes explain the workflow. This is
